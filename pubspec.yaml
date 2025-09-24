@@ -1,0 +1,59 @@
+name: foodieland
+description: "Foodieland is a modern recipe and food discovery app built with Flutter. Users can explore various recipes, view ingredients, follow step-by-step cooking instructions, and save their favorite dishes. The app provides a clean UI, responsive design, and smooth navigation for a delightful cooking experience."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  intl: 0.20.2
+  cupertino_icons: ^1.0.8
+  carousel_slider: ^5.1.1
+  http: ^1.5.0
+  get: ^4.7.2
+  pin_code_fields: ^8.0.1
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.2.0
+  device_preview: ^1.2.0
+  shimmer: ^3.0.0
+  cached_network_image: ^3.4.1
+  image_picker: ^1.2.0
+  url_launcher: ^6.3.2
+  animated_text_kit: ^4.2.2
+  flutter_dotenv: ^6.0.0
+  supabase_flutter: ^2.10.0
+  shared_preferences: ^2.5.3
+  flutter_speed_dial: ^7.0.0
+  google_sign_in: ^7.1.1
+  webview_flutter: ^4.13.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/icons/
+    - assets/images/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
