@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:foodieland/components/action_button/action_button.dart';
 import 'package:foodieland/components/custom_text_field/custom_text_field.dart';
 import 'package:foodieland/components/input_card_container/input_card_container.dart';
-import 'package:foodieland/features/auth/controllers/sign_in_controller.dart';
 import 'package:foodieland/features/auth/controllers/user_profile_controller.dart';
-import 'package:foodieland/features/auth/screens/sign_in_screen.dart';
 import 'package:foodieland/utils/app_colors/app_colors.dart';
 import 'package:foodieland/utils/app_strings/app_strings.dart';
 import 'package:get/get.dart';
@@ -172,29 +170,29 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     builder: (controller) {
                       return Visibility(
                         visible: controller.isLoading == false,
-                        replacement: Center(child: CircularProgressIndicator(),),
+                        replacement: Center(child: CircularProgressIndicator()),
                         child: ActionButton(
                           title: "Update Profile",
                           onPressed: _onTapUpdateProfile,
                           backgroundColor: Colors.black,
                         ),
                       );
-                    }
+                    },
                   ),
                   SizedBox(height: screenHeight * 0.03),
                   GetBuilder(
-                      init: _userProfileController,
-                      builder: (controller) {
-                        return Visibility(
-                          visible: controller.isLoadingDelete == false,
-                          replacement: Center(child: CircularProgressIndicator(),),
+                    init: _userProfileController,
+                    builder: (controller) {
+                      return Visibility(
+                        visible: controller.isLoadingDelete == false,
+                        replacement: Center(child: CircularProgressIndicator()),
                         child: ActionButton(
                           title: "Delete Profile",
                           onPressed: _confirmDeleteAlertDialog,
                           backgroundColor: Colors.grey,
                         ),
                       );
-                    }
+                    },
                   ),
                 ],
               ),
@@ -301,7 +299,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 onPressed: () async {
                   Navigator.pop(context);
                   await _userProfileController.deleteUser();
-                 
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 child: const Text("Yes"),

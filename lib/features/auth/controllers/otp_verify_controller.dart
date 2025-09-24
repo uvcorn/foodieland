@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodieland/features/auth/screens/sign_in_screen.dart';
-import 'package:foodieland/features/common/ui/controllers/favorite_controller.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../components/snackbar_helper/snackbar_helper.dart';

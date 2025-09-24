@@ -9,7 +9,6 @@ import 'package:foodieland/utils/app_colors/app_colors.dart';
 import 'package:get/get.dart';
 import '../../../../components/custom_network_image/custom_network_image.dart';
 import '../../../../utils/app_strings/app_strings.dart';
-import '../../../../utils/assets_path/assets_path.dart';
 import '../../../common/ui/widgets/icon_and_title_widget.dart';
 import '../../../common/ui/widgets/recent_recipe_card.dart';
 import '../widgets/food_speciality_section.dart';
@@ -22,8 +21,6 @@ class RecipeDetailsScreen extends StatefulWidget {
   static final String routeName = '/recipe-details';
   final String recipeId;
 
-
-
   RecipeDetailsScreen({super.key, required this.recipeId});
 
   @override
@@ -32,14 +29,13 @@ class RecipeDetailsScreen extends StatefulWidget {
 
 class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
   final RecipeController _recipeController = Get.find<RecipeController>();
-    RecipeDetailsModel? recipeData;
-    bool isLoading = true;
+  RecipeDetailsModel? recipeData;
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
     fetchRecipe();
   }
-
 
   Future<void> fetchRecipe() async {
     final data = await _recipeController.getRecipeById(widget.recipeId);
@@ -50,8 +46,6 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
       isLoading = false;
     });
   }
-
-
 
   final List<Map<String, String>> ingredientsData = const [
     {
@@ -104,17 +98,12 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     if (isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (recipeData == null) {
-      return const Scaffold(
-        body: Center(child: Text("Recipe not found")),
-      );
+      return const Scaffold(body: Center(child: Text("Recipe not found")));
     }
 
     final recipe = recipeData!;
@@ -187,7 +176,9 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                     SizedBox(height: size.height * 0.03),
 
                     // Food Specialty Section
-                    RecipeSpecialitySection(specialityData: recipe.specialities,),
+                    RecipeSpecialitySection(
+                      specialityData: recipe.specialities,
+                    ),
                     SizedBox(height: size.height * 0.03),
 
                     // Nutrition Information Section
@@ -199,7 +190,9 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                     SizedBox(height: size.height * 0.03),
 
                     // Step-by-Step Preparation
-                    PreparationStepsSection(preparationSteps: recipe.preparationSteps),
+                    PreparationStepsSection(
+                      preparationSteps: recipe.preparationSteps,
+                    ),
                     SizedBox(height: size.height * 0.01),
                     Row(
                       children: [
@@ -224,7 +217,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                   builder: (controller) {
                     return Visibility(
                       visible: controller.isProgress == false,
-                      replacement: Center(child: CircularProgressIndicator(),),
+                      replacement: Center(child: CircularProgressIndicator()),
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
@@ -233,26 +226,30 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
                         itemBuilder: (context, index) {
                           final recipe = controller.recipesFirstList[index];
                           return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0,
+                            ),
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
                                   context,
-                                  RecipeDetailsScreen.routeName,arguments: recipe.id
+                                  RecipeDetailsScreen.routeName,
+                                  arguments: recipe.id,
                                 );
                               },
                               child: RecentRecipeCard(
                                 imageLink: recipe.imageUrl,
                                 title: recipe.title,
                                 cookingTime: '${recipe.cookingTime} Minute',
-                                categoriesName: recipe.category, recipeId: recipe.id,
+                                categoriesName: recipe.category,
+                                recipeId: recipe.id,
                               ),
                             ),
                           );
                         },
                       ),
                     );
-                  }
+                  },
                 ),
               ),
               SizedBox(height: size.height * 0.02),

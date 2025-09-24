@@ -20,12 +20,7 @@ class Blog {
   });
 
   factory Blog.fromMap(Map<String, dynamic> map) {
-    DateTime parsedDate;
-    try {
-      parsedDate = DateTime.tryParse(map['date'] ?? '') ?? DateTime.now();
-    } catch (e) {
-      parsedDate = DateTime.now();
-    }
+    try {} catch (e) {}
     return Blog(
       id: map['id'].toString(),
       title: map['title'] ?? '',

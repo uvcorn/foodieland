@@ -60,6 +60,7 @@ class RecipeController extends GetxController {
     } finally {
       isLoadingGetData.value = false;
     }
+    return null;
   }
 
   /// Upload image to Supabase Storage

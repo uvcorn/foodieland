@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:foodieland/components/snackbar_helper/snackbar_helper.dart';
-import 'package:foodieland/features/auth/screens/sign_in_screen.dart';
 import 'package:foodieland/features/home/ui/screens/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +27,7 @@ class UserProfileController extends GetxController {
     try {
       UserAttributes update;
       if (localImage != null) {
-        final avatarUrl = await _uploadAvatar(localImage!);
+        final avatarUrl = await _uploadAvatar(localImage);
 
         update = UserAttributes(
           data: {'avatar_url': avatarUrl, 'full_name': fullName, 'bio': bio},
@@ -59,7 +58,6 @@ class UserProfileController extends GetxController {
     }
   }
 
-
   Future<String?> _uploadAvatar(File imageFile) async {
     try {
       final user = supabase.auth.currentUser;
@@ -72,10 +70,10 @@ class UserProfileController extends GetxController {
       await supabase.storage
           .from(bucket)
           .upload(
-        filePath,
-        imageFile,
-        fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
-      );
+            filePath,
+            imageFile,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
+          );
 
       final publicUrl = supabase.storage.from(bucket).getPublicUrl(filePath);
       return publicUrl;
@@ -97,9 +95,12 @@ class UserProfileController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse("https://vloxcpjrbpasnaieukli.supabase.co/functions/v1/user_delete_request"),
+        Uri.parse(
+          "https://vloxcpjrbpasnaieukli.supabase.co/functions/v1/user_delete_request",
+        ),
         headers: {
-          "Authorization": "Bearer ${supabase.auth.currentSession?.accessToken}",
+          "Authorization":
+              "Bearer ${supabase.auth.currentSession?.accessToken}",
           "Content-Type": "application/json",
         },
         body: jsonEncode({"user_id": user.id}),
@@ -111,7 +112,6 @@ class UserProfileController extends GetxController {
           message: "Account deleted successfully",
           isSuccess: true,
         );
-
 
         Future.delayed(const Duration(milliseconds: 200), () {
           Get.offAllNamed(HomeScreen.routeName);
@@ -129,5 +129,4 @@ class UserProfileController extends GetxController {
       update();
     }
   }
-
 }

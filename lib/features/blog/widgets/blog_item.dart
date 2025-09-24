@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/blog_model.dart';
 import '../screen/blog_details_screen.dart';
-import 'package:intl/intl.dart';
 
 class BlogItem extends StatelessWidget {
   final Blog blog;
@@ -45,7 +44,6 @@ class BlogItem extends StatelessWidget {
                           color: Colors.grey,
                         ),
                       ),
-
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -107,11 +105,13 @@ class BlogItem extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "Published ${blog.date.toLocal().toString().split(' ')[0]}",
-                            style: const TextStyle(fontSize: 12, color: Colors.grey),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
                             overflow: TextOverflow.fade,
                             textAlign: TextAlign.right,
                           ),
-
                         ),
                       ],
                     ),

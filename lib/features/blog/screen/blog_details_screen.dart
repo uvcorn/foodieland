@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodieland/features/blog/model/blog_model.dart';
 import 'package:foodieland/features/blog/widgets/author_img.dart';
 import 'package:foodieland/features/common/ui/widgets/recent_recipe_card.dart';
-import 'package:foodieland/features/common/ui/widgets/recipe_card.dart';
 import 'package:foodieland/features/home/ui/controllers/random_recipes_controller.dart';
 import 'package:foodieland/features/recipe_section/ui/screens/recipe_details_screen.dart';
 import 'package:get/get.dart';
@@ -47,8 +46,7 @@ class BlogDetailsScreen extends StatelessWidget {
                       AuthorImg(authorImg: blog.authorImg ?? ''),
 
                       const SizedBox(width: 8),
-                      Text("By ${blog.author ?? ''}"),
-
+                      Text("By ${blog.author}"),
                     ],
                   ),
                   Text(
@@ -153,38 +151,42 @@ class BlogDetailsScreen extends StatelessWidget {
               SizedBox(
                 height: 210,
                 child: GetBuilder<RandomRecipesController>(
-                    builder: (controller) {
-                      return Visibility(
-                        visible: controller.isProgress == false,
-                        replacement: Center(child: CircularProgressIndicator(),),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: controller.recipesFirstList.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            final recipe = controller.recipesFirstList[index];
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context,
-                                      RecipeDetailsScreen.routeName,arguments: recipe.id
-                                  );
-                                },
-                                child: RecentRecipeCard(
-                                  imageLink: recipe.imageUrl,
-                                  title: recipe.title,
-                                  cookingTime: '${recipe.cookingTime} Minute',
-                                  categoriesName: recipe.category, recipeId: recipe.id,
-                                ),
+                  builder: (controller) {
+                    return Visibility(
+                      visible: controller.isProgress == false,
+                      replacement: Center(child: CircularProgressIndicator()),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: controller.recipesFirstList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final recipe = controller.recipesFirstList[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0,
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  RecipeDetailsScreen.routeName,
+                                  arguments: recipe.id,
+                                );
+                              },
+                              child: RecentRecipeCard(
+                                imageLink: recipe.imageUrl,
+                                title: recipe.title,
+                                cookingTime: '${recipe.cookingTime} Minute',
+                                categoriesName: recipe.category,
+                                recipeId: recipe.id,
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    }
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
