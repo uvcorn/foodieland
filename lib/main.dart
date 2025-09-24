@@ -7,8 +7,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'features/blog/blog_repository/blog_repo_function.dart';
 //import 'features/blog/data/blog_data.dart';
 
-
-
 final repository = BlogRepository(supabase: Supabase.instance.client);
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -18,15 +16,8 @@ void main() async {
     anonKey: dotenv.env["ANON_KEY"]!,
   );
 
-
   // Upload all blogs
- // await repository.uploadAllBlogs(blogList);
+  // await repository.uploadAllBlogs(blogList);
 
-
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => FoodieLand(), // Wrap your app
-    ),
-  );
+  runApp(FoodieLand());
 }
